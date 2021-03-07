@@ -34,12 +34,18 @@ namespace VendasWebMVC {
             services.AddDbContext<VendasWebMVCContext>(options =>
                    options.UseMySql(Configuration.GetConnectionString("VendasWebMVCContext"), builder =>
         builder.MigrationsAssembly("VendasWebMVC")));
+
+            services.AddScoped<PovoarServico>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env) {
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, PovoarServico povoarServico) {
+
+            // Se estiver no perfil de desenvolvimento
             if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
+                povoarServico.Povoar();
+
             }
             else {
                 app.UseExceptionHandler("/Home/Error");
