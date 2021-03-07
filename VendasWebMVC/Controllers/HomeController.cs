@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using VendasWebMVC.Models;
 
+
 namespace VendasWebMVC.Controllers {
     public class HomeController : Controller {
         public IActionResult Index() {
