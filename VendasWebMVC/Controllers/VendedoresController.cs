@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using VendasWebMVC.Models;
+using VendasWebMVC.Models.ViewModels;
 using VendasWebMVC.Servicos;
 
 namespace VendasWebMVC.Controllers {
@@ -11,9 +12,11 @@ namespace VendasWebMVC.Controllers {
 
         //Declaracao de injecao de dependência da classe VendedorServico
         private readonly VendedorServico _vendedorServico;
+        private readonly DepartamentoServico _departamentoServico;
 
-        public VendedoresController(VendedorServico vendedorServico) {
+        public VendedoresController(VendedorServico vendedorServico, DepartamentoServico departamentoServico) {
             _vendedorServico = vendedorServico;
+            _departamentoServico = departamentoServico;
         }
 
         //Chama o controlador
@@ -25,7 +28,12 @@ namespace VendasWebMVC.Controllers {
         }
 
         public IActionResult Criar() {
-            return View();
+            //Carrega os departamentos
+            var departamentos = _departamentoServico.buscarTodos();
+            //Instancia a variavel departamentos na classe VendedorViewModel
+            var viewModel = new VendedorViewModel { Departamentos = departamentos };
+            //Passa o objeto viewModel para a View
+            return View(viewModel);
         }
 
         [HttpPost]

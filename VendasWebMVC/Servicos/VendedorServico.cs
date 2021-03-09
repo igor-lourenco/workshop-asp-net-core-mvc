@@ -21,7 +21,7 @@ namespace VendasWebMVC.Servicos {
 
         public void Inserir(Vendedor obj) {
 
-            obj.Departamento = _context.Departamento.First();
+            //Adiciona no banco de dados o objeto vendedor chegado como parâmetro
             _context.Add(obj);
             _context.SaveChanges();
         }
