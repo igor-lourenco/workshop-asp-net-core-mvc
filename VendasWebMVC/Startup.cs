@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using VendasWebMVC.Data;
+using VendasWebMVC.Servicos;
 
 namespace VendasWebMVC {
     public class Startup {
@@ -36,6 +37,7 @@ namespace VendasWebMVC {
         builder.MigrationsAssembly("VendasWebMVC")));
 
             services.AddScoped<PovoarServico>();
+            services.AddScoped<VendedorServico>();
         }
 
         // Este método é chamado pelo tempo de execução. Use este método para configurar o pipeline de solicitação HTTP.
