@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using VendasWebMVC.Data;
 using VendasWebMVC.Models;
+using VendasWebMVC.Servicos.Exceptions;
 
 namespace VendasWebMVC.Servicos {
     public class VendedorServico {
@@ -41,6 +42,19 @@ namespace VendasWebMVC.Servicos {
             //Framework deleta no banco de dados
             _context.SaveChanges();
 
+        }
+
+        public void Atualizar(Vendedor obj) {
+            if (!_context.Vendedor.Any(x => x.Id == obj.Id))
+                throw new NotFoundException("Vendedor não existe");
+
+            try {
+                _context.Update(obj);
+                _context.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException e) {
+                throw new DbConcurrencyException(e.Message);
+            }
         }
     }
 }
