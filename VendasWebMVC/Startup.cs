@@ -12,6 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using VendasWebMVC.Data;
 using VendasWebMVC.Servicos;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
 
 namespace VendasWebMVC {
     public class Startup {
@@ -43,6 +45,15 @@ namespace VendasWebMVC {
 
         // Este método é chamado pelo tempo de execução. Use este método para configurar o pipeline de solicitação HTTP.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, PovoarServico povoarServico) {
+
+            var enUs = new CultureInfo("en-US");
+            var localizationOptions = new RequestLocalizationOptions {
+                DefaultRequestCulture = new RequestCulture(enUs),
+                SupportedCultures = new List<CultureInfo> { enUs },
+                SupportedUICultures = new List<CultureInfo> { enUs }
+            };
+
+            app.UseRequestLocalization(localizationOptions);
 
             // Se estiver no perfil de desenvolvimento
             if (env.IsDevelopment()) {
