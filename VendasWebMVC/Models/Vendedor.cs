@@ -17,11 +17,10 @@ namespace VendasWebMVC.Models {
         [Required(ErrorMessage = "{0} obrigatorio")]
         public string Email { get; set; }
 
-        [Display(Name = "Data Aniversario")]
+        [Display(Name = "Data Nascimento")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0: dd/MM/yyyy}")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         [Required(ErrorMessage = "{0} obrigatorio")]
-        [EmailAddress(ErrorMessage = "Digite um email valido")]
         public DateTime DataNascimento { get; set; }
 
         [Display(Name = "Salario Base")]
