@@ -35,12 +35,16 @@ namespace VendasWebMVC.Servicos {
 
         public async Task RemoverAsync(int id) {
 
-            //Pega o objeto passando o id
-            var obj = await _context.Vendedor.FindAsync(id);
-            //Remove no DBSet
-            _context.Vendedor.Remove(obj);
-            //Framework deleta no banco de dados
-            await _context.SaveChangesAsync();
+            try {
+                //Pega o objeto passando o id
+                var obj = await _context.Vendedor.FindAsync(id);
+                //Remove no DBSet
+                _context.Vendedor.Remove(obj);
+                //Framework deleta no banco de dados
+                await _context.SaveChangesAsync();
+            }catch(DbUpdateException e) {
+                throw new IntegrityException("Não pode deletar vendedor porque ele tem vendas");
+            }
 
         }
 
