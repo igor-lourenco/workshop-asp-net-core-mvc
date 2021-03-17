@@ -41,6 +41,7 @@ namespace VendasWebMVC {
             services.AddScoped<PovoarServico>();
             services.AddScoped<VendedorServico>();
             services.AddScoped<DepartamentoServico>();
+            services.AddScoped<VendasRecordeServico>();
         }
 
         // Este método é chamado pelo tempo de execução. Use este método para configurar o pipeline de solicitação HTTP.
